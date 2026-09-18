@@ -1,0 +1,197 @@
+; saved on 2026.09.17 22:30:18
+; this file contains input parameters for testing/optimizing GT Prediction Advance v 1.8 expert advisor
+; to use it in the strategy tester, click Load in the context menu of the Inputs tab
+;
+; ===== GENERAL =====
+MagicNumber=500002221||600001050||1||6000010500||N
+DailyDeposit=50000.0||50000.0||5000.000000||500000.000000||N
+EnableChartDisplay=false||false||0||true||N
+; ===== ADX HEDGE =====
+EnableADXHedge=true||false||0||true||N
+ADXHedgeMinGrids=10||15||1||150||N
+ADXHedgeThreshold=35||30.0||3.000000||300.000000||N
+ADXHedgePeriod=14||14||1||140||N
+ADXHedgeTimeframe=1||0||0||49153||N
+ADXHedgeLotMultiplier=0.5||0.25||0.025000||2.500000||N
+ADXHedgeMagicNumber=500002222||600001051||1||6000010510||N
+ADXHedgeAffectsBasketTP=true||false||0||true||N
+; ===== INITIAL TRADE =====
+InitialLot=0.02||0.01||0.001000||0.100000||N
+InitialDistance=0.9||0.6||0.060000||6.000000||N
+InitialTPPips=35.0||100.0||10.000000||1000.000000||N
+PostCloseDelaySec=3||3||1||30||N
+; ===== DYNAMIC EQUITY COMPOUNDING =====
+EnableAutoLotCompounding=false||false||0||true||N
+CompoundingBaseBalance=50000.0||50000.0||5000.000000||500000.000000||N
+; ===== LEVEL 1 TREND-RUNNER =====
+EnableLevel1TrendRunner=true||false||0||true||N
+Level1PartialClosePct=50.0||50.0||5.000000||500.000000||N
+Level1BreakevenBufferPips=5.0||5.0||0.500000||50.000000||N
+Level1TrailingDistancePips=50.0||50.0||5.000000||500.000000||N
+Level1TrailFullSingleLot=true||false||0||true||N
+; ===== PENDING ORDER RESET (MARKET MOVES AWAY) =====
+EnablePendingOrderReset=true||false||0||true||N
+PendingResetDistancePips=30.0||30.0||3.000000||300.000000||N
+; ===== MARTINGALE =====
+Multiplier=1.35||1.68||0.168000||16.800000||N
+MaximumTrades=12||20||1||200||N
+MaximumLot=15||5.0||0.500000||50.000000||N
+; ===== GRID LIMIT CONTROL =====
+EnableHardGridCap=true||false||0||true||N
+MaxGridLevelsHardCap=12||20||1||200||N
+EnableMaxPositionsClose=false||false||0||true||N
+MaxPositionsToClose=20||10||1||100||N
+PauseRestOfDayOnMaxPosClose=false||false||0||true||N
+; ===== DIRECTIONAL PREDICTION (WIN-RATE FILTER) =====
+EnableDirectionalPrediction=true||false||0||true||N
+PredictionTimeframe=15||0||0||49153||N
+PredictionFastMAPeriod=20||20||1||200||N
+PredictionSlowMAPeriod=50||50||1||500||N
+PredictionRSIPeriod=14||14||1||140||N
+PredictionADXPeriod=14||14||1||140||N
+PredictionADXTrendThreshold=18||22.0||2.200000||220.000000||N
+PredictionRSIOverbought=60||65.0||6.500000||650.000000||N
+PredictionRSIOversold=25.0||35.0||3.500000||350.000000||N
+OnlyTradeBothWhenSideways=true||false||0||true||N
+; ===== 24-HOUR RANGE BOUNDARY GUARD =====
+EnableRangeBoundaryFilter=true||false||0||true||N
+RangeBoundaryThresholdPct=20.0||20.0||2.000000||200.000000||N
+RangeLookbackHours=24||24||1||240||N
+RangeBoundarySidewaysOnly=true||false||0||true||N
+; ===== SUPPORT / RESISTANCE ZONE FILTER =====
+EnableSRFilter=true||false||0||true||N
+SRTimeframe=16385||0||0||49153||N
+SRLookbackBars=150||150||1||1500||N
+SRSwingStrength=3||3||1||30||N
+SRZoneBufferPips=15.0||50.0||5.000000||500.000000||N
+SRMinTouches=2||2||1||20||N
+; ===== TREND FILTER (NO COUNTER-TREND ENTRIES) =====
+EnableTrendFilter=true||false||0||true||N
+TrendFilterTimeframe=16385||0||0||49153||N
+TrendFilterMAPeriod=100||100||1||1000||N
+TrendFilterADXThreshold=25.0||25.0||2.500000||250.000000||N
+; ===== MACRO H4 TREND FILTER =====
+EnableMacroTrendFilter=true||false||0||true||N
+MacroTrendTimeframe=16388||0||0||49153||N
+MacroTrendMAPeriod=200||200||1||2000||N
+MacroCounterTrendMode=1||0||0||1||N
+MacroCounterTrendMaxGrid=6||6||1||60||N
+MacroWithTrendMaxGrid=15||15||1||150||N
+EnableMacroSkew=true||false||0||true||N
+MacroWithTrendLotMult=1.5||1.5||0.150000||15.000000||N
+MacroWithTrendDistMult=0.9||0.9||0.090000||9.000000||N
+MacroCounterTrendLotMult=1.0||1.0||0.100000||10.000000||N
+MacroCounterTrendDistMult=1.2||1.2||0.120000||12.000000||N
+; ===== PREDICTION LOGGING =====
+EnablePredictionLog=false||false||0||true||N
+PredictionLogFileName=GT_Prediction_Log.csv
+; ===== ATR DISTANCE SCALING =====
+UseATRDistanceScaling=true||false||0||true||N
+ATR_Period=14||14||1||140||N
+ATR_Timeframe=0||0||0||49153||N
+ATR_MinRatio=1.0||1.0||0.100000||10.000000||N
+ATR_MaxRatio=2.0||2.0||0.200000||20.000000||N
+; ===== BASKET TAKE PROFIT =====
+BasketTP=0.6||0.6||0.060000||6.000000||N
+EnableStepBasketTP=true||false||0||true||N
+StepBasketTPGridLevel=10||15||1||150||N
+StepBasketTP=0.1||0.1||0.010000||1.000000||N
+UseATRBasketTPScaling=true||false||0||true||N
+ATR_TP_MaxRatio=2.0||2.0||0.200000||20.000000||N
+EnableTimeDecayTP=true||false||0||true||N
+TimeDecayHours=24.0||24.0||2.400000||240.000000||N
+DecayBasketTP=0.05||0.05||0.005000||0.500000||N
+InpCompensateSwapAndCommission=true||false||0||true||N
+InpEnsureNetProfitOnTP=true||false||0||true||N
+InpMinNetProfitOnTP=1.0||1.0||0.100000||10.000000||N
+; ===== SESSIONS: AUTO GMT & TIMING =====
+AutoAdaptSessionGMT=true||false||0||true||N
+SessionsBaseGMT=3||3||1||30||N
+; ===== SESSION 1 (Asian Morning Calm) =====
+EnableSession1=true||false||0||true||N
+Session1Start=00:15
+Session1End=04:45
+Session1DistanceMultiplier=1.15||1.1||0.110000||11.000000||N
+Session1LotMultiplier=2||1.0||0.100000||10.000000||N
+; ===== SESSION 2 (Post-NY Night Consolidation) =====
+EnableSession2=true||false||0||true||N
+Session2Start=05:15
+Session2End=08:30
+Session2DistanceMultiplier=1.15||1.1||0.110000||11.000000||N
+Session2LotMultiplier=2||1.0||0.100000||10.000000||N
+; ===== SESSION 3 (European Lunch Range) =====
+EnableSession3=true||false||0||true||N
+Session3Start=10:30
+Session3End=12:15
+Session3DistanceMultiplier=1.15||1.1||0.110000||11.000000||N
+Session3LotMultiplier=1.0||1.0||0.100000||10.000000||N
+; ===== SESSION 4 (Post-London Morning Reversion) =====
+EnableSession4=true||false||0||true||N
+Session4Start=17:00
+Session4End=19:30
+Session4DistanceMultiplier=1.15||1.1||0.110000||11.000000||N
+Session4LotMultiplier=1.0||1.0||0.100000||10.000000||N
+; ===== SESSION 5 (Overnight Asian / Disabled) =====
+EnableSession5=true||false||0||true||N
+Session5Start=21:30
+Session5End=23:30
+Session5DistanceMultiplier=1.15||1.1||0.110000||11.000000||N
+Session5LotMultiplier=1.0||1.0||0.100000||10.000000||N
+; ===== FRIDAY TRADING FILTER =====
+EnableFridayFilter=true||false||0||true||N
+FridayCutoffTime=14:00
+; ===== FRIDAY ROLLOVER PROTECTION (LEVEL 8+) =====
+EnableFridayBasketRule=true||false||0||true||N
+FridayBasketActionTime=20:00
+FridayBasketMinLevel=8||8||1||80||N
+FridayBasketAction=0||0||0||1||N
+FridayHedgeCloseOnMonday=true||false||0||true||N
+MondayHedgeUnfreezeTime=08:00
+; ===== DRAWDOWN CONTROL (BASKET SL) =====
+EnableDDControl=false||false||0||true||N
+DDControlMode=0||0||0||2||N
+MaxDrawdownPct=30||10.0||1.000000||100.000000||N
+MaxDrawdownMoney=12500.0||500.0||50.000000||5000.000000||N
+BasketStopLoss=5.0||5.0||0.500000||50.000000||N
+DDPauseHours=3.0||2.0||0.200000||20.000000||N
+PauseRestOfDayOnDDControl=true||false||0||true||N
+; ===== DRAWDOWN MONITOR & LOGGING =====
+EnableDDLogging=false||false||0||true||N
+DDLogThreshold=10000.0||50000.0||5000.000000||500000.000000||N
+WriteDDLogToFile=false||false||0||true||N
+DDLogFileName=DD_10000_Log.csv
+; ===== BASKET MAX DURATION =====
+EnableMaxGridDuration=false||false||0||true||N
+MaxGridDurationHours=60||12.0||1.200000||120.000000||N
+; ===== NEWS FILTER: GENERAL =====
+InpEnableNewsFilter=true||false||0||true||N
+InpNewsGmtMode=0||0||1||10||N
+InpNewsGmtOffset=2||2||1||20||N
+InpNewsBeforeMinutes=60||60||1||600||N
+InpNewsAfterMinutes=60||60||1||600||N
+InpBlockGridDuringNews=true||false||0||true||N
+; ===== NEWS FILTER: OFFLINE CSV (BACKTEST & LIVE) =====
+InpUseOfflineNewsCSV=true||false||0||true||N
+InpNewsCSVFileName=news.csv
+InpNewsCSVCommonDir=false||false||0||true||N
+InpNewsCurrencies=USD,XAU
+InpNewsFilterHighOnly=true||false||0||true||N
+; ===== NEWS FILTER: EVENTS =====
+InpFilterFOMC_Rate=true||false||0||true||N
+InpFilterFOMC_DotPlot=true||false||0||true||N
+InpFilterFOMC_PressConf=true||false||0||true||N
+InpFilterNFP=true||false||0||true||N
+InpFilterCPI=true||false||0||true||N
+InpFilterCorePCE=true||false||0||true||N
+InpFilterGDP=true||false||0||true||N
+InpFilterRetailSales=true||false||0||true||N
+InpFilterPPI=true||false||0||true||N
+InpFilterISM_PMI=true||false||0||true||N
+InpFilterJacksonHole=true||false||0||true||N
+InpFilterFedChairSpeech=true||false||0||true||N
+; ===== SPECIFIC TRADING DATES ONLY =====
+EnableAllowedDatesOnly=false||false||0||true||N
+AllowedTradingDates=
+; ===== SKIP TRADING DATES =====
+EnableSkipDatesFilter=true||false||0||true||N
+SkipTradingDates=26-mAr-2026,02-Sep-2026,05-Aug-2026,22-July-2026,30-Mar-2026,20-Jan-2026,05-Jan-2026,08-Jan-2026,02-Feb-2026,06-Feb-2026,18-Mar-2026,23-Mar-2026
