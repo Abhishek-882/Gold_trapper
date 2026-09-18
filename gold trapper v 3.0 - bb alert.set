@@ -1,5 +1,5 @@
 ; saved on 2026.09.17 22:30:18
-; this file contains input parameters for testing/optimizing GT Prediction Advance v 1.8 expert advisor
+; this file contains input parameters for testing/optimizing GT Prediction BB Alert v3.0 expert advisor
 ; to use it in the strategy tester, click Load in the context menu of the Inputs tab
 ;
 ; ===== GENERAL =====
@@ -42,8 +42,14 @@ MaxGridLevelsHardCap=12||20||1||200||N
 EnableMaxPositionsClose=false||false||0||true||N
 MaxPositionsToClose=20||10||1||100||N
 PauseRestOfDayOnMaxPosClose=false||false||0||true||N
+; ===== BB ALERT ARROWS (MAIN ENTRY SIGNAL) =====
+EnableBBAlertSignal=true||false||0||true||N
+BBAlertTimeframe=0||0||0||49153||N
+InpBBLookbackPeriod=24||24||1||240||N
+InpBBSignalGap=3||3||1||30||N
+InpBBSignalBar=1||1||1||10||N
 ; ===== DIRECTIONAL PREDICTION (WIN-RATE FILTER) =====
-EnableDirectionalPrediction=true||false||0||true||N
+EnableDirectionalPrediction=false||false||0||true||N
 PredictionTimeframe=15||0||0||49153||N
 PredictionFastMAPeriod=20||20||1||200||N
 PredictionSlowMAPeriod=50||50||1||500||N
@@ -54,24 +60,24 @@ PredictionRSIOverbought=60||65.0||6.500000||650.000000||N
 PredictionRSIOversold=25.0||35.0||3.500000||350.000000||N
 OnlyTradeBothWhenSideways=true||false||0||true||N
 ; ===== 24-HOUR RANGE BOUNDARY GUARD =====
-EnableRangeBoundaryFilter=true||false||0||true||N
+EnableRangeBoundaryFilter=false||false||0||true||N
 RangeBoundaryThresholdPct=20.0||20.0||2.000000||200.000000||N
 RangeLookbackHours=24||24||1||240||N
 RangeBoundarySidewaysOnly=true||false||0||true||N
 ; ===== SUPPORT / RESISTANCE ZONE FILTER =====
-EnableSRFilter=true||false||0||true||N
+EnableSRFilter=false||false||0||true||N
 SRTimeframe=16385||0||0||49153||N
 SRLookbackBars=150||150||1||1500||N
 SRSwingStrength=3||3||1||30||N
 SRZoneBufferPips=15.0||50.0||5.000000||500.000000||N
 SRMinTouches=2||2||1||20||N
 ; ===== TREND FILTER (NO COUNTER-TREND ENTRIES) =====
-EnableTrendFilter=true||false||0||true||N
+EnableTrendFilter=false||false||0||true||N
 TrendFilterTimeframe=16385||0||0||49153||N
 TrendFilterMAPeriod=100||100||1||1000||N
 TrendFilterADXThreshold=25.0||25.0||2.500000||250.000000||N
 ; ===== MACRO H4 TREND FILTER =====
-EnableMacroTrendFilter=true||false||0||true||N
+EnableMacroTrendFilter=false||false||0||true||N
 MacroTrendTimeframe=16388||0||0||49153||N
 MacroTrendMAPeriod=200||200||1||2000||N
 MacroCounterTrendMode=1||0||0||1||N
