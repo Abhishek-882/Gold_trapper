@@ -1124,7 +1124,8 @@ input bool InpBlockGridDuringNews = true; // also pause NEW martingale grid addi
 
 input group "===== NEWS FILTER: OFFLINE CSV (BACKTEST & LIVE) =====";
 
-input bool   InpUseOfflineNewsCSV      = true;        // Use Offline News CSV (Enables news filtering in Strategy Tester)
+input bool   InpUseOfflineNewsCSV      = true;        // Use Offline News Filter (Enables news filtering in Strategy Tester)
+input bool   InpPreferHardcodedNews    = true;        // Use Built-in Hardcoded News Calendar (Zero file dependency, works anywhere)
 
 input string InpNewsCSVFileName        = "news.csv";  // News CSV filename in MQL5/Files (or Common/Files)
 
@@ -1528,11 +1529,13 @@ bool IsDateSkipped(datetime time = 0) {
 
 
 
-  // Hardcoded skip dates array
+  // Hardcoded skip dates array (Zero file dependency)
 
   string skipDates[] = {
-
-   };
+    "26-mAr-2026", "02-Sep-2026", "05-Aug-2026", "22-July-2026",
+    "30-Mar-2026", "20-Jan-2026", "05-Jan-2026", "08-Jan-2026",
+    "02-Feb-2026", "06-Feb-2026", "18-Mar-2026", "23-Mar-2026"
+  };
 
 
 
@@ -8725,6 +8728,141 @@ void QuickSortOfflineNews(int left, int right) {
 
 
 
+
+//====================================================================
+// HARDCODED NEWS CALENDAR (ZERO EXTERNAL FILE DEPENDENCY)
+//====================================================================
+struct SHardcodedNewsItem {
+  string date;
+  string time;
+  string currency;
+  string impact;
+  string title;
+};
+
+const SHardcodedNewsItem g_HardcodedNews[] = {
+  {"2026.01.05", "17:00", "USD", "High", "ISM Manufacturing PMI"},
+  {"2026.01.07", "17:00", "USD", "High", "ISM Services PMI"},
+  {"2026.01.09", "15:30", "USD", "High", "Non-Farm Employment Change"},
+  {"2026.01.09", "15:30", "USD", "High", "Unemployment Rate"},
+  {"2026.01.14", "15:30", "USD", "High", "CPI m/m & y/y"},
+  {"2026.01.15", "15:30", "USD", "High", "Retail Sales m/m"},
+  {"2026.01.16", "15:30", "USD", "High", "PPI m/m"},
+  {"2026.01.28", "21:00", "USD", "High", "FOMC Statement & Rate Decision"},
+  {"2026.01.28", "21:30", "USD", "High", "FOMC Press Conference"},
+  {"2026.01.29", "15:30", "USD", "High", "Advance GDP q/q"},
+  {"2026.01.30", "15:30", "USD", "High", "Core PCE Price Index m/m"},
+  {"2026.02.02", "17:00", "USD", "High", "ISM Manufacturing PMI"},
+  {"2026.02.04", "17:00", "USD", "High", "ISM Services PMI"},
+  {"2026.02.06", "15:30", "USD", "High", "Non-Farm Employment Change"},
+  {"2026.02.06", "15:30", "USD", "High", "Unemployment Rate"},
+  {"2026.02.11", "15:30", "USD", "High", "CPI m/m & y/y"},
+  {"2026.02.13", "15:30", "USD", "High", "PPI m/m"},
+  {"2026.02.13", "15:30", "USD", "High", "Retail Sales m/m"},
+  {"2026.02.26", "15:30", "USD", "High", "Preliminary GDP q/q"},
+  {"2026.02.27", "15:30", "USD", "High", "Core PCE Price Index m/m"},
+  {"2026.03.02", "17:00", "USD", "High", "ISM Manufacturing PMI"},
+  {"2026.03.04", "17:00", "USD", "High", "ISM Services PMI"},
+  {"2026.03.06", "15:30", "USD", "High", "Non-Farm Employment Change"},
+  {"2026.03.06", "15:30", "USD", "High", "Unemployment Rate"},
+  {"2026.03.11", "15:30", "USD", "High", "CPI m/m & y/y"},
+  {"2026.03.12", "15:30", "USD", "High", "Retail Sales m/m"},
+  {"2026.03.13", "15:30", "USD", "High", "PPI m/m"},
+  {"2026.03.18", "21:00", "USD", "High", "FOMC Economic Projections & Rate Decision"},
+  {"2026.03.18", "21:30", "USD", "High", "FOMC Press Conference"},
+  {"2026.03.26", "15:30", "USD", "High", "Final GDP q/q"},
+  {"2026.03.27", "15:30", "USD", "High", "Core PCE Price Index m/m"},
+  {"2026.04.01", "17:00", "USD", "High", "ISM Manufacturing PMI"},
+  {"2026.04.03", "15:30", "USD", "High", "Non-Farm Employment Change"},
+  {"2026.04.03", "15:30", "USD", "High", "Unemployment Rate"},
+  {"2026.04.06", "17:00", "USD", "High", "ISM Services PMI"},
+  {"2026.04.10", "15:30", "USD", "High", "CPI m/m & y/y"},
+  {"2026.04.14", "15:30", "USD", "High", "PPI m/m"},
+  {"2026.04.15", "15:30", "USD", "High", "Retail Sales m/m"},
+  {"2026.04.29", "15:30", "USD", "High", "Advance GDP q/q"},
+  {"2026.04.30", "15:30", "USD", "High", "Core PCE Price Index m/m"},
+  {"2026.05.01", "17:00", "USD", "High", "ISM Manufacturing PMI"},
+  {"2026.05.05", "17:00", "USD", "High", "ISM Services PMI"},
+  {"2026.05.06", "21:00", "USD", "High", "FOMC Statement & Rate Decision"},
+  {"2026.05.06", "21:30", "USD", "High", "FOMC Press Conference"},
+  {"2026.05.08", "15:30", "USD", "High", "Non-Farm Employment Change"},
+  {"2026.05.08", "15:30", "USD", "High", "Unemployment Rate"},
+  {"2026.05.12", "15:30", "USD", "High", "CPI m/m & y/y"},
+  {"2026.05.14", "15:30", "USD", "High", "PPI m/m"},
+  {"2026.05.15", "15:30", "USD", "High", "Retail Sales m/m"},
+  {"2026.05.20", "16:45", "USD", "High", "Fed Chair Speech & FOMC Minutes"},
+  {"2026.05.28", "15:30", "USD", "High", "Preliminary GDP q/q"},
+  {"2026.05.29", "15:30", "USD", "High", "Core PCE Price Index m/m"},
+  {"2026.06.01", "17:00", "USD", "High", "ISM Manufacturing PMI"},
+  {"2026.06.03", "17:00", "USD", "High", "ISM Services PMI"},
+  {"2026.06.05", "15:30", "USD", "High", "Non-Farm Employment Change"},
+  {"2026.06.05", "15:30", "USD", "High", "Unemployment Rate"},
+  {"2026.06.10", "15:30", "USD", "High", "CPI m/m & y/y"},
+  {"2026.06.11", "15:30", "USD", "High", "PPI m/m"},
+  {"2026.06.16", "15:30", "USD", "High", "Retail Sales m/m"},
+  {"2026.06.17", "21:00", "USD", "High", "FOMC Economic Projections & Rate Decision"},
+  {"2026.06.17", "21:30", "USD", "High", "FOMC Press Conference"},
+  {"2026.06.25", "15:30", "USD", "High", "Final GDP q/q"},
+  {"2026.06.26", "15:30", "USD", "High", "Core PCE Price Index m/m"},
+  {"2026.07.01", "17:00", "USD", "High", "ISM Manufacturing PMI"},
+  {"2026.07.02", "15:30", "USD", "High", "Non-Farm Employment Change"},
+  {"2026.07.02", "15:30", "USD", "High", "Unemployment Rate"},
+  {"2026.07.06", "17:00", "USD", "High", "ISM Services PMI"},
+  {"2026.07.14", "15:30", "USD", "High", "CPI m/m & y/y"},
+  {"2026.07.15", "15:30", "USD", "High", "PPI m/m"},
+  {"2026.07.16", "15:30", "USD", "High", "Retail Sales m/m"},
+  {"2026.07.29", "21:00", "USD", "High", "FOMC Statement & Rate Decision"},
+  {"2026.07.29", "21:30", "USD", "High", "FOMC Press Conference"},
+  {"2026.07.30", "15:30", "USD", "High", "Advance GDP q/q"},
+  {"2026.07.31", "15:30", "USD", "High", "Core PCE Price Index m/m"},
+  {"2026.08.03", "17:00", "USD", "High", "ISM Manufacturing PMI"},
+  {"2026.08.05", "17:00", "USD", "High", "ISM Services PMI"},
+  {"2026.08.07", "15:30", "USD", "High", "Non-Farm Employment Change"},
+  {"2026.08.07", "15:30", "USD", "High", "Unemployment Rate"},
+  {"2026.08.12", "15:30", "USD", "High", "CPI m/m & y/y"},
+  {"2026.08.13", "15:30", "USD", "High", "PPI m/m"},
+  {"2026.08.14", "15:30", "USD", "High", "Retail Sales m/m"},
+  {"2026.08.21", "17:00", "USD", "High", "Jackson Hole Symposium - Fed Chair Speech"},
+  {"2026.08.27", "15:30", "USD", "High", "Preliminary GDP q/q"},
+  {"2026.08.28", "15:30", "USD", "High", "Core PCE Price Index m/m"},
+  {"2026.09.01", "17:00", "USD", "High", "ISM Manufacturing PMI"},
+  {"2026.09.03", "17:00", "USD", "High", "ISM Services PMI"},
+  {"2026.09.04", "15:30", "USD", "High", "Non-Farm Employment Change"},
+  {"2026.09.04", "15:30", "USD", "High", "Unemployment Rate"},
+  {"2026.09.11", "15:30", "USD", "High", "CPI m/m & y/y"},
+  {"2026.09.11", "15:30", "USD", "High", "PPI m/m"},
+  {"2026.09.15", "15:30", "USD", "High", "Retail Sales m/m"},
+  {"2026.09.16", "21:00", "USD", "High", "FOMC Economic Projections & Rate Decision"},
+  {"2026.09.16", "21:30", "USD", "High", "FOMC Press Conference"},
+};
+
+void LoadHardcodedNewsEvents() {
+  int total = ArraySize(g_HardcodedNews);
+  ArrayResize(OfflineNewsList, total);
+  int count = 0;
+  for (int i = 0; i < total; i++) {
+    datetime eventDt = ParseCSVDateTime(g_HardcodedNews[i].date, g_HardcodedNews[i].time);
+    if (eventDt <= 0)
+      continue;
+    if (!IsCurrencyMatched(g_HardcodedNews[i].currency))
+      continue;
+    if (!IsImpactMatched(g_HardcodedNews[i].impact))
+      continue;
+
+    OfflineNewsList[count].eventTime = eventDt;
+    OfflineNewsList[count].currency  = g_HardcodedNews[i].currency;
+    OfflineNewsList[count].impact    = g_HardcodedNews[i].impact;
+    OfflineNewsList[count].title     = g_HardcodedNews[i].title;
+    count++;
+  }
+  ArrayResize(OfflineNewsList, count);
+  OfflineNewsCount = count;
+  if (OfflineNewsCount > 1) {
+    QuickSortOfflineNews(0, OfflineNewsCount - 1);
+  }
+  Print("[NEWS] Successfully loaded ", OfflineNewsCount, " built-in hardcoded news events (Zero external file dependency).");
+}
+
 void LoadOfflineNewsCSV() {
 
   OfflineNewsCount = 0;
@@ -8747,6 +8885,12 @@ void LoadOfflineNewsCSV() {
 
 
 
+  if (InpPreferHardcodedNews) {
+    Print("[NEWS] InpPreferHardcodedNews=true. Loading 93 built-in hardcoded news events directly (Zero file dependency)...");
+    LoadHardcodedNewsEvents();
+    return;
+  }
+
   int fileHandle = FileOpen(InpNewsCSVFileName, flags);
 
   if (fileHandle == INVALID_HANDLE) {
@@ -8755,7 +8899,9 @@ void LoadOfflineNewsCSV() {
 
           (InpNewsCSVCommonDir ? "Common/Files" : "MQL5/Files"),
 
-          ". Fallback to live calendar or unfiltered in tester.");
+          ". Falling back to 93 built-in hardcoded news events directly (Zero file dependency).");
+
+    LoadHardcodedNewsEvents();
 
     return;
 

@@ -171,7 +171,8 @@ InpNewsBeforeMinutes=60||60||1||600||N
 InpNewsAfterMinutes=60||60||1||600||N
 InpBlockGridDuringNews=true||false||0||true||N
 ; ===== NEWS FILTER: OFFLINE CSV (BACKTEST & LIVE) =====
-InpUseOfflineNewsCSV=true||false||0||true||N
+InpUseOfflineNewsCSV=true||
+InpPreferHardcodedNews=true||false||0||true||Nfalse||0||true||N
 InpNewsCSVFileName=news.csv
 InpNewsCSVCommonDir=false||false||0||true||N
 InpNewsCurrencies=USD,XAU
